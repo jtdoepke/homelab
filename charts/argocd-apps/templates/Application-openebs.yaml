@@ -1,0 +1,27 @@
+{{ if .Values.openebs.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openebs
+  namespace: {{ .Values.destination.namespace | quote }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: {{ .Values.openebs.namespace | default "default" | quote }}
+    server: {{ .Values.openebs.server | default .Values.destination.server | quote }}
+  source:
+    chart: openebs
+    repoURL: https://openebs.github.io/charts
+    targetRevision: {{ .Values.openebs.chartRevision | quote }}
+    helm:
+      values: {{ .Values.openebs.values | quote }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}

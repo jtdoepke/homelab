@@ -1,0 +1,26 @@
+apiVersion: v2
+name: argocd-bootstrap
+description: A Helm chart for bootstrapping my homelab with ArgoCD.
+
+# A chart can be either an 'application' or a 'library' chart.
+#
+# Application charts are a collection of templates that can be packaged into versioned archives
+# to be deployed.
+#
+# Library charts provide useful utilities or functions for the chart developer. They're included as
+# a dependency of application charts to inject those utilities and functions into the rendering
+# pipeline. Library charts do not define any templates and therefore cannot be deployed.
+type: application
+
+version: "0.0.1"
+
+# This is the argo-cd Helm chart release version to deploy.
+appVersion: "3.30.0"
+dependencies:
+  - name: argo-cd
+    version: 3.30.0
+    repository: https://argoproj.github.io/argo-helm
+    alias: argocd
+    # import-values:
+    #   - data
+

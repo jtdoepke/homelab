@@ -1,0 +1,13 @@
+argocd:
+  configs:
+    repositories:
+      - name: homelab
+        url: https://jtdoepke.github.io/homelab
+        type: helm
+      - name: argocd
+        url: https://argoproj.github.io/argo-helm
+        type: helm
+
+argocdApps:
+  enable: true
+  targetRevision: '*'

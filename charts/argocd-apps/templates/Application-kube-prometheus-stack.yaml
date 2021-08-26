@@ -1,0 +1,29 @@
+{{ if .Values.kubePrometheusStack.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: {{ .Values.destination.namespace | quote }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: {{ .Values.kubePrometheusStack.namespace | default "default" | quote }}
+    server: {{ .Values.kubePrometheusStack.server | default .Values.destination.server | quote }}
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: {{ .Values.kubePrometheusStack.chartRevision | quote }}
+    helm:
+      values: {{ .Values.kubePrometheusStack.values }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}

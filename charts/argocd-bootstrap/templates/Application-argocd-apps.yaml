@@ -1,0 +1,26 @@
+{{ if .Values.argocdApps.enable }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-apps
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  destination:
+    namespace: {{ .Release.Namespace | quote }}
+    server: https://kubernetes.default.svc
+  project: argocd
+  source:
+    chart: argocd-apps
+    helm:
+      values: |
+{{ toYaml .Values | indent 8 }}
+    repoURL: https://jtdoepke.github.io/homelab
+    targetRevision: {{ .Values.argocdApps.targetRevision | quote }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}

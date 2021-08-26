@@ -1,0 +1,16 @@
+destination:
+  server: https://kubernetes.default.svc
+
+openebs:
+  enabled: true
+  namespace: "openebs"
+  chartRevision: "~2.12.2"
+  values: ""
+
+kubePrometheusStack:
+  enabled: true
+  namespace: "monitoring"
+  chartRevision: "~18.0.5"
+  values: |
+    lvm-localpv:
+      enabled: false

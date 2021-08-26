@@ -1,0 +1,24 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  destination:
+    namespace: {{ .Release.Namespace | quote }}
+    server: https://kubernetes.default.svc
+  project: argocd
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: {{ .Chart.AppVersion | quote }}
+    helm:
+      values: |
+{{ toYaml .Values | indent 8 }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
