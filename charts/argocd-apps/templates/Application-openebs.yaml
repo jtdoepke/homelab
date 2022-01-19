@@ -6,7 +6,7 @@ metadata:
   name: openebs
   namespace: {{ .Values.destination.namespace | quote }}
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
@@ -17,7 +17,8 @@ spec:
     repoURL: https://openebs.github.io/charts
     targetRevision: {{ .Values.openebs.chartRevision | quote }}
     helm:
-      values: {{ .Values.openebs.values | quote }}
+      values: |
+{{ toYaml .Values.openebs.values | indent 8 }}
   syncPolicy:
     automated:
       prune: true

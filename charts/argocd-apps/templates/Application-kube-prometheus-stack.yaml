@@ -8,7 +8,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
@@ -19,7 +19,8 @@ spec:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: {{ .Values.kubePrometheusStack.chartRevision | quote }}
     helm:
-      values: {{ .Values.kubePrometheusStack.values }}
+      values: |
+{{ toYaml .Values.kubePrometheusStack.values | indent 8 }}
   syncPolicy:
     automated:
       prune: true
