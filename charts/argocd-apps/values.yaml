@@ -4,13 +4,13 @@ destination:
 openebs:
   enabled: true
   namespace: "openebs"
-  chartRevision: "~2.12.2"
+  chartRevision: "~3.1.0"
   values: {}
 
 kubePrometheusStack:
   enabled: true
   namespace: "monitoring"
-  chartRevision: "~18.0.5"
+  chartRevision: "~30.0.1"
   values:
     lvm-localpv:
       enabled: false
