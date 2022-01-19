@@ -12,7 +12,7 @@ description: A Helm chart for bootstrapping my homelab with ArgoCD.
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
 
-version: "0.0.1"
+version: "0.0.2"
 
 # This is the argo-cd Helm chart release version to deploy.
 appVersion: "3.30.0"
