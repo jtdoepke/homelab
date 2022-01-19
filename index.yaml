@@ -1,0 +1,30 @@
+apiVersion: v1
+entries:
+  argocd-apps:
+  - apiVersion: v2
+    appVersion: v1alpha1
+    created: "2022-01-19T04:57:44.958688861Z"
+    description: A Helm chart to bootstrap ArgoCD with the app-of-apps.
+    digest: ebdd77b7195b63a4125cfaef94a0b54519b6a8ed09e5d65ed90784b6709b7b60
+    name: argocd-apps
+    type: application
+    urls:
+    - https://github.com/jtdoepke/homelab/releases/download/argocd-apps-0.0.2/argocd-apps-0.0.2.tgz
+    version: 0.0.2
+  argocd-bootstrap:
+  - apiVersion: v2
+    appVersion: 3.30.0
+    created: "2022-01-19T04:57:45.123662557Z"
+    dependencies:
+    - alias: argocd
+      name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 3.30.0
+    description: A Helm chart for bootstrapping my homelab with ArgoCD.
+    digest: 3adf102d139fa5f8345ef6207f2911d6a6315a743e47b71d5c34d3eedfbe07c7
+    name: argocd-bootstrap
+    type: application
+    urls:
+    - https://github.com/jtdoepke/homelab/releases/download/argocd-bootstrap-0.0.2/argocd-bootstrap-0.0.2.tgz
+    version: 0.0.2
+generated: "2022-01-19T04:57:45.123673957Z"
